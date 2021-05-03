@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import rospy
-from std_msgs.msg import Float32
+from std_msgs.msg import String
 from kobuki_msgs.msg import Sound
 
 class QrCodeReader:
@@ -17,15 +17,16 @@ class QrCodeReader:
         self.msg_sound.value = 2
         
         # Then subscriber
-        rospy.Subscriber('/qr_codes', Float32, self.callback)
+        rospy.Subscriber('/qr_codes', String, self.callback)
         
 
     def callback(self, data):
         rospy.loginfo(data.data)
-        if (data == 'start'):
+        qr_code = data.data
+        if (qr_code == 'start'):
             self.msg_sound.value = 2
             self.pub_sound.publish(self.msg_sound)
-        elif (data == stop):
+        elif (qr_code == 'stop'):
             self.msg_sound.value = 6
             self.pub_sound.publish(self.msg_sound)
 
