@@ -25,7 +25,7 @@ class QrCodeReader:
         if (data == 'start'):
             self.msg_sound.value = 2
             self.pub_sound.publish(self.msg_sound)
-        else if (data == stop):
+        elif (data == stop):
             self.msg_sound.value = 6
             self.pub_sound.publish(self.msg_sound)
 
